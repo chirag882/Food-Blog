@@ -4,10 +4,14 @@ const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+var connectDatabase = require("./server/models/database");
 require(`dotenv`).config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
+
+// connecting to database
+connectDatabase();
 
 
 app.use(express.urlencoded({extended: true}));

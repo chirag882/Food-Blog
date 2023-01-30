@@ -1,13 +1,23 @@
-const mongoose = require('mongoose');
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(){
-  console.log('Connected')
-});
+const mongoose = require("mongoose");
 
+const connectDatabase = () => {
+  mongoose.set("strictQuery", false);
+
+  mongoose.connect(
+    process.env.MONGODB_URI,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, res) {
+      try {
+        console.log("Connected to Database");
+      } catch (err) {
+        throw err;
+      }
+    }
+  );
+};
+
+module.exports = connectDatabase;
 // Models
-require('./Category');
+// require('./Category');
 // require('./Recipe');
