@@ -13,7 +13,6 @@ const port = process.env.PORT;
 // connecting to database
 connectDatabase();
 
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(expressLayouts);
@@ -25,7 +24,9 @@ app.use(session({
   resave: true
 }));
 app.use(flash());
-app.use(fileUpload());
+app.use(fileUpload({
+  useTempFiles:true
+}));
 
 app.set('layout','./layouts/main');
 app.set('view engine','ejs');
